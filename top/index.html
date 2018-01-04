@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 400px;
+            margin:0 auto;
+        }
+        .box div{
+            width: 400px;
+            height: 300px;
+            border:1px solid red;
+            display:none;
+        }
+        input{
+        	background: white;
+        	width: 100px;
+        	height: 40px;
+        	border: 1px solid black;
+        }
+        .box input.ac{
+            background:goldenrod;
+        }
+    </style>
+    <script src="./top.js"></script>
+    <script>
+
+
+        function AutoTab(id){
+            Tab.apply(this,arguments);
+
+
+            this.iNow=0;
+
+
+            this.fnAutoPlay();
+        }
+        AutoTab.prototype=new Tab();
+        AutoTab.prototype.constructor=AutoTab;
+
+
+
+
+        AutoTab.prototype.fnNext=function(){
+            this.fnClick(this.iNow);
+
+
+            this.iNow++;
+
+
+            this.iNow%=this.aBtn.length;
+        };
+
+
+        AutoTab.prototype.fnAutoPlay=function(){
+
+
+            setInterval(function(){
+                this.fnNext();
+            }.bind(this),500);
+        };
+
+
+        window.onload=function(){
+            new Tab('box');
+            new AutoTab('box2');
+        }
+    </script>
+</head>
+<body>
+    <div id="box" class="box">
+        <input class="ac" type="button" value="按钮一">
+        <input type="button" value="按钮二">
+        <input type="button" value="按钮三">
+        <div style="display:block">001</div>
+        <div>002</div>
+        <div>003</div>
+    </div>
+
+
+    <div id="box2" class="box">
+        <input class="ac" type="button" value="按钮一">
+        <input type="button" value="按钮二">
+        <input type="button" value="按钮三">
+        <div style="display:block">001</div>
+        <div>002</div>
+        <div>003</div>
+    </div>
+</body>
+</html>
